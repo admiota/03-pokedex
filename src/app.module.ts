@@ -9,16 +9,18 @@ import { CommonModule } from './common/common.module';
 import { SeedModule } from './seed/seed.module';
 import { ConfigModule } from '@nestjs/config';
 import { EnvConfiguration } from './config/app.config';
+import { JoiValidationSchema } from './config/joi.validation';
 
 @Module({
   imports: [
     ConfigModule.forRoot({
-      load: [EnvConfiguration]
+      load: [EnvConfiguration],
+      validationSchema: JoiValidationSchema
     }), //Para detectar las .envs
     ServeStaticModule.forRoot({ //Para servir contenido estático
       rootPath: join(__dirname, '..', 'public')
     }),
-    MongooseModule.forRoot(process.env.MONGODB), //Para establecer conexión con la bbdd de mongo
+    MongooseModule.forRoot(process.env.MONGODB, {dbName: 'pokemonsdb'}), //Para establecer conexión con la bbdd de mongo
     PokemonModule,
     CommonModule,
     SeedModule
