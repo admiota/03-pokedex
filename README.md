@@ -43,3 +43,19 @@ http://localhost:3000/api/v2/seed
 
 - Mongo DB
 - Nest
+
+# Production Build
+
+1. Crear el archivo **.env.prod**
+2. Llenar las variables de entorno de prod
+3. Crear la imagen con el comando:
+
+```
+docker-compose -f docker-compose.prod.yaml --env-file .env.prod up --build
+```
+
+4. Una vez creada podemos arrancar en modo detouch:
+
+```
+docker-compose -f docker-compose.prod.yaml --env-file .env.prod up -d
+```
